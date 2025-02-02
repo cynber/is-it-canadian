@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     onInput(event) {
-      // 
+      //
     },
     async searchProduct() {
       if (!this.barcode.trim()) {
@@ -58,10 +58,12 @@ export default {
         } else {
           this.error = "No product found with this barcode.";
           console.error("No product found with this barcode.");
+          this.$emit("product-fetched", null);
         }
       } catch (err) {
         this.error = "An error occurred while fetching data.";
         console.error("An error occurred while fetching data:", err);
+        this.$emit("product-fetched", null);
       } finally {
         this.loading = false;
       }

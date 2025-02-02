@@ -1,10 +1,14 @@
 <template>
   <VerticalContainer>
-    <HeaderCard title="Search for a product" />
+    <HeaderCard title='Search for a product' />
     <BarcodeEntry @product-fetched="onProductFetched" />
-    <ProductOrigin v-if="product" :product="product" />
+    <ProductOrigin 
+      v-if="searchAttempted"
+      :product="product" 
+    />
   </VerticalContainer>
 </template>
+
 
 <script>
 import { HeaderCard, VerticalContainer } from '@cynber/vitepress-valence';
@@ -17,17 +21,19 @@ export default {
     HeaderCard,
     VerticalContainer,
     BarcodeEntry,
-    ProductOrigin
+    ProductOrigin,
   },
   data() {
     return {
-      product: null
+      product: null,
+      searchAttempted: false
     };
   },
   methods: {
     onProductFetched(product) {
+      this.searchAttempted = true;
       this.product = product;
-    }
-  }
-}
+    },
+  },
+};
 </script>

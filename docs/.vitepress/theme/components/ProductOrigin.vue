@@ -1,13 +1,94 @@
 <template>
   <div class="product-origin">
-    <img :src="product.image_url" alt="Product Image" class="product-image" />
-    <div class="product-info">
-      <h3>{{ product.product_name }}</h3>
-      <p>Brands: {{ product.brands }}</p>
-      <p>Quantity: {{ product.quantity }}</p>
-      <div class="origin-pill" :class="isCanadian ? 'green' : 'gray'">
-        Origin: {{ originsDisplay }}
+    <div v-if="product && product.brands && product.product_name">
+      <div class="product-image-container" v-if="product.image_url">
+        <img
+          :src="product.image_url"
+          alt="Product Image"
+          class="product-image"
+          @load="handleImageLoad"
+          ref="productImage"
+        />
       </div>
+      <div class="product-info">
+        <div class="product-header">
+          <strong>{{ product.brands }}:</strong> {{ product.product_name }}
+        </div>
+        <div class="location-section">
+          <div class="location-info">
+            <strong>Origin(s) of ingredients:</strong>
+            <div class="info-content">
+              <template
+                v-if="formattedOrigins[0] === 'This information has not been entered.'"
+              >
+                This info has not been entered, 
+                <a href="/guide/#add-product-information">you can submit it</a>.
+              </template>
+              <div v-else class="location-pills">
+                <div
+                  v-for="origin in formattedOrigins"
+                  :key="origin"
+                  class="pill"
+                  :class="origin.toLowerCase().includes('canada') ? 'green' : 'gray'"
+                >
+                  {{ formatLocation(origin) }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="location-info">
+            <strong>Manufacturing / Processing:</strong>
+            <div class="info-content">
+              <template
+                v-if="
+                  formattedManufacturingPlaces[0] ===
+                  'This information has not been entered.'
+                "
+              >
+                This info has not been entered, 
+                <a href="/guide/#add-product-information">you can submit it</a>.
+              </template>
+              <div v-else class="location-pills">
+                <div
+                  v-for="place in formattedManufacturingPlaces"
+                  :key="place"
+                  class="pill"
+                  :class="place.toLowerCase().includes('canada') ? 'green' : 'gray'"
+                >
+                  {{ formatLocation(place) }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="location-info">
+            <strong>Places where it is sold:</strong>
+            <div class="info-content">
+              <template
+                v-if="
+                  formattedPurchasePlaces[0] === 'This information has not been entered.'
+                "
+              >
+                This info has not been entered, 
+                <a href="/guide/#add-product-information">you can submit it</a>.
+              </template>
+              <div v-else class="location-pills">
+                <div
+                  v-for="place in formattedPurchasePlaces"
+                  :key="place"
+                  class="pill"
+                  :class="place.toLowerCase().includes('canada') ? 'green' : 'gray'"
+                >
+                  {{ formatLocation(place) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="product-not-found">
+      This product is not listed in the database. <br />
+      Check the barcode again, or <a href="/guide/#add-product-information">contribute by submitting it</a> 💛
     </div>
   </div>
 </template>
@@ -18,64 +99,165 @@ export default {
   props: {
     product: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
+  },
+  methods: {
+    formatLocation(location) {
+      return location.split(":").pop().trim().toUpperCase();
+    },
+    handleImageLoad(event) {
+      const img = event.target;
+      if (img.naturalWidth > img.naturalHeight) {
+        img.classList.add("landscape");
+      } else {
+        img.classList.add("portrait");
+        img.classList.add("rotate");
+      }
+    },
   },
   computed: {
-    isCanadian() {
-      return (Array.isArray(this.product.origins) && this.product.origins.includes('Canada')) || this.product.origins === 'Canada';
+    formattedOrigins() {
+      if (Array.isArray(this.product.origins)) {
+        return this.product.origins;
+      }
+      if (this.product.origins && typeof this.product.origins === "string") {
+        return this.product.origins.split(",").map((s) => s.trim());
+      }
+      return ["This information has not been entered."];
     },
-    originsDisplay() {
-      return Array.isArray(this.product.origins) ? this.product.origins.join(', ') : this.product.origins || 'Unknown';
-    }
-  }
-}
+    formattedManufacturingPlaces() {
+      if (Array.isArray(this.product.manufacturing_places_tags)) {
+        return this.product.manufacturing_places_tags;
+      }
+      if (
+        this.product.manufacturing_places &&
+        typeof this.product.manufacturing_places === "string"
+      ) {
+        return this.product.manufacturing_places.split(",").map((s) => s.trim());
+      }
+      return ["This information has not been entered."];
+    },
+    formattedPurchasePlaces() {
+      if (Array.isArray(this.product.purchase_places_tags)) {
+        return this.product.purchase_places_tags;
+      }
+      if (this.product.countries && typeof this.product.countries === "string") {
+        return this.product.countries.split(",").map((s) => s.trim());
+      }
+      return ["This information has not been entered."];
+    },
+  },
+};
 </script>
 
 <style scoped>
 .product-origin {
-  background-color: var(--vp-c-bg);
-  border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin-bottom: 16px;
-  width: calc(100% + 16px);
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  margin: -16px auto 0;
+  border-radius: 8px;
+  background-color: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.product-image-container {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .product-image {
-  width: 80%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 16px;
+}
+
+.product-image.landscape {
+  width: 100%;
+  height: auto;
+}
+
+.product-image.portrait.rotate {
+  transform: rotate(-90deg) scale(1.5);
+  width: 200px;
+  height: auto;
 }
 
 .product-info {
-  text-align: center;
+  width: 100%;
 }
 
-.product-info h3 {
-  margin: 0 0 8px 0;
+.product-header {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  width: 100%;
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  padding: 15px;
 }
 
-.origin-pill {
-  display: inline-block;
-  padding: 4px 8px;
+.location-section {
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.location-info {
+  margin-bottom: 15px;
+}
+
+.info-content {
+  margin: 10px 20px;
+}
+
+.location-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 5px 10px;
   border-radius: 4px;
-  margin-top: 8px;
+  font-size: 0.9em;
 }
 
-.origin-pill.green {
-  background-color: var(--vp-button-brand-bg);
+.green {
+  background-color: var(--vp-c-red-3);
   color: var(--vp-button-brand-text);
 }
 
-.origin-pill.gray {
-  background-color: var(--vp-c-bg-soft);
+.gray {
+  background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-2);
+}
+
+.product-not-found {
+  text-align: center;
+  color: var(--vp-c-text-2);
+}
+
+a {
+  color: var(--vp-c-brand);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.info-content:not(.location-pills) {
   color: var(--vp-c-text-2);
 }
 </style>
