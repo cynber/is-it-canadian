@@ -16,3 +16,4 @@ Documentation on the tools below:
 
 - [VitePress](https://vitepress.vuejs.org/)
 - [VitePress-Valence](https://cynber.dev/projects/vitepress-valence/)
+- [Open Food Facts Search](https://world.openfoodfacts.org/files/api-documentation.html#jump-SearchRequests-Searchingforproducts)
