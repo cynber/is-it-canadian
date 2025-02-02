@@ -17,7 +17,8 @@ import {
   VerticalContainer,
   HorizontalContainer,
   VerticalCard,
-  HorizontalCard
+  HorizontalCard,
+  EmbedLemmy
 } from '@cynber/vitepress-valence';  
 
 export default {
@@ -36,6 +37,7 @@ export default {
     app.component('HorizontalContainer', HorizontalContainer)
     app.component('VerticalCard', VerticalCard)
     app.component('HorizontalCard', HorizontalCard)
+    app.component('EmbedLemmy', EmbedLemmy)
     app.provide('authors', authors)
     app.provide('postsData', postsData)
   }

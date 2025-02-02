@@ -5,7 +5,8 @@ export default defineConfig({
   title: "Is it Canadian",
   description: "A website to help you determine where a product was made",
   head: [
-    ['link', { rel: 'icon', href: '/icon/moose-32.png' }]
+    ['link', { rel: 'icon', href: '/icon/moose-32.png' }],
+    ['meta', { property: 'og:image', content: 'https://isitcanadian.cynber.dev/social_share.png' }]
   ],
   cleanUrls: true,
   vite: { 
@@ -16,8 +17,8 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Product Search', link: '/product-search' },
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Blog', link: '/blog' },
+      { text: 'About', link: '/guide/' },
+      { text: 'Community', link: '/community' },
     ],
 
     sidebar: {

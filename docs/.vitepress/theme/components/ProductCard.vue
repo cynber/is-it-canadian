@@ -1,19 +1,27 @@
 <template>
   <div class="product-card">
     <div class="product-image" v-if="product.image_url">
-      <img :src="product.image_url" :alt="product.name">
+      <img :src="product.image_url" :alt="product.name" />
     </div>
     <div class="product-info">
-      <h3>{{ product.brand }}: {{ product.name }}</h3>
+      <div class="product-header">
+        <strong>{{ product.brand }}</strong
+        >: {{ product.name }}
+      </div>
       <div class="origin-info">
-        <strong>Origins:</strong> 
+        <strong>Origin: </strong>
         <span :class="{ 'missing-data': product.origins === 'Origin not specified' }">
           {{ product.origins }}
         </span>
       </div>
       <div class="manufacturing-info">
-        <strong>Manufacturing:</strong> 
-        <span :class="{ 'missing-data': product.manufacturing_places === 'Manufacturing location not specified' }">
+        <strong>Manufacturing: </strong>
+        <span
+          :class="{
+            'missing-data':
+              product.manufacturing_places === 'Manufacturing location not specified',
+          }"
+        >
           {{ product.manufacturing_places }}
         </span>
       </div>
@@ -37,40 +45,41 @@ export default {
 .product-card {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
-  padding: 15px;
-  margin: 10px 0;
+  padding: 20px;
+  margin: 10px;
   display: flex;
-  gap: 15px;
-  background-color: var(--vp-c-bg-soft);
+  gap: 20px;
+  background-color: var(--vp-c-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
 }
 
 .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 4px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .product-info {
   flex: 1;
 }
 
-.product-info h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.1em;
+.product-header {
+  font-size: 1.2em;
+  margin-bottom: 15px;
 }
 
 .origin-info,
 .manufacturing-info {
   font-size: 0.9em;
   color: var(--vp-c-text-2);
-  margin: 5px 0;
+  margin: 10px 0 0;
 }
 
 .missing-data {
