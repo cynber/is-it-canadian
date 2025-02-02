@@ -21,7 +21,7 @@
               <template
                 v-if="formattedOrigins[0] === 'This information has not been entered.'"
               >
-                This info has not been entered, 
+                This info has not been entered,
                 <a href="/guide/#add-product-information">you can submit it</a>.
               </template>
               <div v-else class="location-pills">
@@ -45,7 +45,7 @@
                   'This information has not been entered.'
                 "
               >
-                This info has not been entered, 
+                This info has not been entered,
                 <a href="/guide/#add-product-information">you can submit it</a>.
               </template>
               <div v-else class="location-pills">
@@ -68,7 +68,7 @@
                   formattedPurchasePlaces[0] === 'This information has not been entered.'
                 "
               >
-                This info has not been entered, 
+                This info has not been entered,
                 <a href="/guide/#add-product-information">you can submit it</a>.
               </template>
               <div v-else class="location-pills">
@@ -88,7 +88,13 @@
     </div>
     <div v-else class="product-not-found">
       This product is not listed in the database. <br />
-      Check the barcode again, or <a href="/guide/#add-product-information">contribute by submitting it</a> 💛
+      Check the barcode again, or
+      <a href="/guide/#add-product-information">contribute by submitting it</a> 💛
+    </div>
+    <div class="find-alternatives" v-if="product && product.brands">
+      <button class="find-alternatives-button" @click="findCanadianAlternatives">
+        Find Canadian Alternatives
+      </button>
     </div>
   </div>
 </template>
@@ -114,6 +120,9 @@ export default {
         img.classList.add("portrait");
         img.classList.add("rotate");
       }
+    },
+    findCanadianAlternatives() {
+      this.$emit("find-alternatives", this.product);
     },
   },
   computed: {
@@ -259,5 +268,21 @@ a:hover {
 
 .info-content:not(.location-pills) {
   color: var(--vp-c-text-2);
+}
+
+.find-alternatives {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.find-alternatives-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+  border: 1px solid var(--vp-button-brand-border);
+  font-size: 1rem;
+  cursor: pointer;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="search-and-recommend">
     <div class="left-section">
-      <Search />
+      <Search @find-alternatives="findAlternatives" />
     </div>
     <div class="right-section">
-      <Recommend />
+      <Recommend ref="recommend" />
     </div>
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
   components: {
     Search,
     Recommend,
+  },
+  methods: {
+    async findAlternatives(product) {
+      await this.$refs.recommend.loadAlternatives(product);
+    },
   },
 };
 </script>
