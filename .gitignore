@@ -1,0 +1,6 @@
+node_modules
+.vscode
+
+# recommended by vitepress
+docs/.vitepress/dist
+docs/.vitepress/cache
