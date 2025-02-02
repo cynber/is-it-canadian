@@ -8,9 +8,11 @@ hero:
 
 ## Canadian Products, Canadian... Social Media?
 
-Why stop at Canadian products? The fediverse is new form of social media. Similar to email or phone numbers, so you can join on one website (or 'instance') and still connect to people elsewhere. It prevents one company from having too much power, and you get a lot more choice over your online experience! If you would prefer a video explanation, [you can watch this short explanation](https://framatube.org/w/9dRFC6Ya11NCVeYKn8ZhiD).
+Why stop at Canadian products? The fediverse is new form of social media change how we interact online. It is a network of independent social media platforms that can communicate with each other to each other.
 
-[Fedecan](https://fedecan.ca) is a Canadian non-profit that is working on hosting more of these platforms. They run [lemmy.ca](https://lemmy.ca), a reddit-like social media platform. This is where we will make a community, once we settle on a name for this project.
+Similar to email or phone numbers, you can sign up with one service while still being able to interact with people elsewhere. It prevents one company or group from getting too much power, and you get a lot of choice on your online experience! If you would prefer a video explanation, [you can find one here](https://framatube.org/w/9dRFC6Ya11NCVeYKn8ZhiD).
+
+[Fedecan](https://fedecan.ca) is a Canadian non-profit that is working on setting up more of these platforms. They run [lemmy.ca](https://lemmy.ca), one of the Canadian sections of reddit-like social media platforms. This is where we will eventually make a community, once we settle on a name for this project.
 
 ### Featured Posts
 
