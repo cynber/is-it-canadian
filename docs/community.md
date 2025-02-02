@@ -18,8 +18,7 @@ Similar to email or phone numbers, you can sign up with one service while still 
 
 <EmbedLemmy
   :links="[
-    'https://lemmy.ca/post/38456474',
-    'https://lemmy.ca/post/38456474'
+    'https://lemmy.ca/post/38474037'
   ]"
   :titleLines="2"
   :excerptLines="3"
