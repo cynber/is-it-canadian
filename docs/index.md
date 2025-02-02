@@ -5,15 +5,15 @@ layout: home
 hero:
   name: "Is it Canadian"
   # text: ""
-  tagline: A website to help you determine where a product was made
-  image: /icon/moose-512.png
+  tagline: Find out where a product was made
+  image: /icon/moose-home.png
   actions:
     - theme: brand
       text: Search for a product
       link: /product-search
-    # - theme: alt
-    #   text: API Examples
-    #   link: /api-examples
+    - theme: alt
+      text: How you can help
+      link: /guide/#contribute
 
 # features:
 #   - title: Feature A
