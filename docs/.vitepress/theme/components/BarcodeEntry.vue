@@ -1,4 +1,8 @@
 <template>
+  <div class="barcode-scanner">
+    <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"></StreamBarcodeReader>
+    <ImageBarcodeReader @decode="onDecode" @error="onError"></ImageBarcodeReader>
+  </div>
   <div class="barcode-entry">
     <input
       type="text"
@@ -68,12 +72,23 @@ export default {
         this.loading = false;
       }
     },
+    onDecode(result) {
+      console.log("Decoded", result);
+      this.barcode = result.text;
+      this.searchProduct();
+    },
+    onLoaded() {
+      console.log("Scanner is loaded and ready");
+    },
+    onError(error) {
+      console.log("Error decoding", error);
+    },
   },
 };
 </script>
 
 <style scoped>
-.barcode-entry {
+.barcode-entry, .barcode-scanner {
   display: flex;
   justify-content: space-between;
   align-items: center;
