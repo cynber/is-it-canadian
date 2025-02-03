@@ -10,7 +10,6 @@
     "vue": "^3.5.13"
   },
   "dependencies": {
-    "@cynber/vitepress-valence": "^0.1.12",
-    "vue-barcode-reader": "^1.0.3"
+    "@cynber/vitepress-valence": "^0.1.12"
   }
 }
