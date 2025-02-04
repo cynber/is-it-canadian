@@ -76,7 +76,7 @@ import ImageScanner from "./ImageScanner.vue";
 import StreamScanner from "./StreamScanner.vue";
 
 export default {
-  name: "BarcodeEntry",
+  name: "BarcodeInput",
   components: {
     Icon,
     ImageScanner,

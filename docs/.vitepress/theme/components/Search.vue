@@ -1,8 +1,8 @@
 <template>
   <VerticalContainer>
     <HeaderCard title="Search for a product" />
-    <BarcodeEntry @product-fetched="onProductFetched" />
-    <ProductOrigin
+    <BarcodeInput @product-fetched="onProductFetched" />
+    <ProductCardOrigin
       v-if="searchAttempted"
       :product="product"
       @find-alternatives="onFindAlternatives"
@@ -12,16 +12,16 @@
 
 <script>
 import { HeaderCard, VerticalContainer } from "@cynber/vitepress-valence";
-import BarcodeEntry from "./BarcodeEntry.vue";
-import ProductOrigin from "./ProductOrigin.vue";
+import BarcodeInput from "./search/BarcodeInput.vue";
+import ProductCardOrigin from "./card/ProductCardOrigin.vue";
 
 export default {
   name: "Search",
   components: {
     HeaderCard,
     VerticalContainer,
-    BarcodeEntry,
-    ProductOrigin,
+    BarcodeInput,
+    ProductCardOrigin,
   },
   data() {
     return {

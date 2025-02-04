@@ -4,14 +4,8 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import '@cynber/vitepress-valence/style.css'
-import { StreamBarcodeReader, ImageBarcodeReader } from "vue-barcode-reader";
+
 import { Icon } from '@iconify/vue'
-
-import authors from './data/authors.js'
-import { data as postsData } from './data/posts.data.js'
-
-import SearchAndRecommend from './components/SearchAndRecommend.vue'
-
 import { 
   BlogPostHeader,
   BlogPostList,
@@ -21,7 +15,12 @@ import {
   VerticalCard,
   HorizontalCard,
   EmbedLemmy
-} from '@cynber/vitepress-valence';  
+} from '@cynber/vitepress-valence';
+
+import authors from './data/authors.js'
+import { data as postsData } from './data/posts.data.js'
+
+import SearchAndRecommend from './components/SearchAndRecommend.vue'
 
 export default {
   extends: DefaultTheme,
@@ -31,10 +30,8 @@ export default {
     })
   },
   enhanceApp({ app, router, siteData }) {
-    app.component('StreamBarcodeReader', StreamBarcodeReader)
-    app.component('ImageBarcodeReader', ImageBarcodeReader)
+    // Imported
     app.component('Icon', Icon)
-    app.component('SearchAndRecommend', SearchAndRecommend)
     app.component('BlogPostHeader', BlogPostHeader)
     app.component('BlogPostList', BlogPostList)
     app.component('HeaderCard', HeaderCard)
@@ -43,6 +40,9 @@ export default {
     app.component('VerticalCard', VerticalCard)
     app.component('HorizontalCard', HorizontalCard)
     app.component('EmbedLemmy', EmbedLemmy)
+
+    // Custom
+    app.component('SearchAndRecommend', SearchAndRecommend)
     app.provide('authors', authors)
     app.provide('postsData', postsData)
   }
