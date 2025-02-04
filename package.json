@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@cynber/vitepress-valence": "^0.1.12",
-    "@zxing/library": "0.21.3",
-    "vue-barcode-reader": "^1.0.3"
+    "@zxing/library": "0.21.3"
   }
 }
