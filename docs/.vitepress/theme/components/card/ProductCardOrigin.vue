@@ -101,7 +101,7 @@
 
 <script>
 export default {
-  name: "ProductOrigin",
+  name: "ProductCardOrigin",
   props: {
     product: {
       type: Object,
@@ -249,6 +249,7 @@ export default {
 
 .gray {
   background-color: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-divider);
   color: var(--vp-c-text-2);
 }
 

@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "ProductCard",
+  name: "ProductCardSimple",
   props: {
     product: {
       type: Object,

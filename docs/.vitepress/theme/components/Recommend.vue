@@ -75,7 +75,7 @@
           </div>
 
           <div class="product-cards">
-            <ProductCard
+            <ProductCardSimple
               v-for="product in currentPageProducts"
               :key="product.id"
               :product="product"
@@ -106,14 +106,14 @@
 
 <script>
 import { HeaderCard, HorizontalContainer } from "@cynber/vitepress-valence";
-import ProductCard from "./ProductCard.vue";
+import ProductCardSimple from "./card/ProductCardSimple.vue";
 
 export default {
   name: "Recommend",
   components: {
     HorizontalContainer,
     HeaderCard,
-    ProductCard,
+    ProductCardSimple,
   },
   data() {
     return {
@@ -241,7 +241,7 @@ export default {
 
       const response = await fetch(searchUrl, {
         headers: {
-          "User-Agent": "ProductOriginFinder/1.0",
+          "User-Agent": "ProductCardOriginFinder/1.0",
         },
       });
 
