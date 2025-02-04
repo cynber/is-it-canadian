@@ -5,6 +5,7 @@ import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import '@cynber/vitepress-valence/style.css'
 import { StreamBarcodeReader, ImageBarcodeReader } from "vue-barcode-reader";
+import { Icon } from '@iconify/vue'
 
 import authors from './data/authors.js'
 import { data as postsData } from './data/posts.data.js'
@@ -32,6 +33,7 @@ export default {
   enhanceApp({ app, router, siteData }) {
     app.component('StreamBarcodeReader', StreamBarcodeReader)
     app.component('ImageBarcodeReader', ImageBarcodeReader)
+    app.component('Icon', Icon)
     app.component('SearchAndRecommend', SearchAndRecommend)
     app.component('BlogPostHeader', BlogPostHeader)
     app.component('BlogPostList', BlogPostList)
