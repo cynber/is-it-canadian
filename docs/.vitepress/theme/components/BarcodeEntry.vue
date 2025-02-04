@@ -1,69 +1,87 @@
 <template>
   <div class="barcode-entry">
-    <!-- First row -->
-    <div class="input-group__row">
-      <button
-        class="entry-btn scan-btn"
-        :class="{ 'scan-btn--active': barcode }"
-        @click="toggleCamera"
-      >
-        <Icon icon="material-symbols:barcode-scanner-rounded" width="24" height="24" />
-        Scan a code
-      </button>
+    <!-- Show this when not searching -->
+    <template v-if="!isSearchActive">
+      <!-- First row -->
+      <div class="input-group__row">
+        <button
+          class="entry-btn scan-btn"
+          :class="{ 'scan-btn--active': barcode }"
+          @click="toggleCamera"
+        >
+          <Icon icon="material-symbols:barcode-scanner-rounded" width="24" height="24" />
+          Scan a code
+        </button>
 
-      <label class="entry-btn upload-btn">
-        <Icon icon="material-symbols:image" width="24" height="24" />
-        Upload Image
-        <ImageBarcodeReader
-          class="hidden-upload"
-          @decode="onDecode"
-          @error="onError"
-        ></ImageBarcodeReader>
-      </label>
-    </div>
+        <label class="entry-btn upload-btn">
+          <Icon icon="material-symbols:image" width="24" height="24" />
+          Upload Image
+          <ImageScanner
+            class="hidden-upload"
+            @decode="onDecode"
+            @error="onError"
+          ></ImageScanner>
+        </label>
+      </div>
 
-    <!-- Second row -->
-    <div class="input-group__row">
-      <input
-        type="text"
-        class="text-input"
-        placeholder="Enter a barcode"
-        v-model="barcode"
-        @input="onInput"
-      />
-      <button
-        class="entry-btn search-btn"
-        :class="{ 'search-btn--active': barcode }"
-        @click="searchProduct"
-      >
-        <Icon icon="mdi:search" width="24" height="24" />
-        Search
+      <!-- Second row -->
+      <div class="input-group__row">
+        <input
+          type="text"
+          class="text-input"
+          placeholder="Enter a barcode"
+          v-model="barcode"
+          @input="onInput"
+        />
+        <button
+          class="entry-btn search-btn"
+          :class="{ 'search-btn--active': barcode }"
+          @click="searchProduct"
+        >
+          <Icon icon="mdi:search" width="24" height="24" />
+          Search
+        </button>
+      </div>
+    </template>
+
+    <!-- Show this when searching -->
+    <template v-else>
+      <button class="entry-btn reset-btn" @click="resetSearch">
+        <Icon icon="tabler:trash" width="24" height="24" />
+        Search for another product
       </button>
-    </div>
+    </template>
   </div>
 
   <!-- Camera scanner (hidden by default) -->
   <div v-if="showCamera" class="camera">
     <button class="camera-close" @click="toggleCamera">✕ Close Camera</button>
-    <StreamBarcodeReader
+    <StreamScanner
+      v-if="showCamera"
       @decode="onDecode"
       @loaded="onLoaded"
-      :paused="!showCamera"
+      @error="onError"
       :constraints="{
         facingMode: 'environment',
         width: { min: 640, ideal: 1280, max: 1920 },
         height: { min: 480, ideal: 720, max: 1080 },
       }"
-    ></StreamBarcodeReader>
+    ></StreamScanner>
   </div>
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
-import { StreamBarcodeReader, ImageBarcodeReader } from 'vue-barcode-reader';
+import ImageScanner from "./ImageScanner.vue";
+import StreamScanner from "./StreamScanner.vue";
 
 export default {
   name: "BarcodeEntry",
+  components: {
+    Icon,
+    ImageScanner,
+    StreamScanner,
+  },
   emits: ["product-fetched"],
   data() {
     return {
@@ -71,6 +89,7 @@ export default {
       loading: false,
       error: null,
       showCamera: false,
+      isSearchActive: false,
     };
   },
   methods: {
@@ -118,6 +137,7 @@ export default {
 
         if (data.status === 1 && data.product) {
           this.$emit("product-fetched", data.product);
+          this.isSearchActive = true; // Add this line
         } else {
           this.error = "No product found with this barcode.";
           this.$emit("product-fetched", null);
@@ -129,13 +149,25 @@ export default {
         this.loading = false;
       }
     },
+
+    resetSearch() {
+      this.barcode = "";
+      this.isSearchActive = false;
+      this.error = null;
+      this.$emit("product-fetched", null);
+    },
+
     onDecode(result) {
-      console.log("Decoded:", result);
-      console.log("Barcode:", result.text);
-      if (result && result.text) {
-        this.barcode = result.text;
+      const barcodeText = typeof result === "string" ? result : result?.text;
+
+      console.log("Decoded result:", result);
+      console.log("Barcode text:", barcodeText);
+
+      if (barcodeText) {
+        this.barcode = barcodeText;
         this.showCamera = false;
         this.stopCamera();
+        this.searchProduct();
       }
     },
     onLoaded() {
@@ -143,7 +175,16 @@ export default {
     },
     onError(error) {
       console.error("Error decoding:", error);
+      this.error = "Error reading barcode. Please try again.";
     },
+    onInput(event) {
+      this.barcode = event.target.value.replace(/[^0-9]/g, "");
+    },
+  },
+  beforeUnmount() {
+    if (this.showCamera) {
+      this.stopCamera();
+    }
   },
 };
 </script>
@@ -240,5 +281,19 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   z-index: 1;
+}
+
+.reset-btn {
+  width: 100%;
+  background-color: var(--vp-button-brand-bg);
+  color: var(--vp-button-brand-text);
+  border-color: var(--vp-button-brand-border);
+  padding: 12px 24px;
+  font-size: 1.1rem;
+}
+
+.reset-btn:hover {
+  background-color: var(--vp-button-brand-hover-bg);
+  border-color: var(--vp-button-brand-hover-border);
 }
 </style>

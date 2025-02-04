@@ -31,8 +31,13 @@ export default {
   },
   methods: {
     onProductFetched(product) {
-      this.searchAttempted = true;
-      this.product = product;
+      if (product === null) {
+        this.searchAttempted = false;
+        this.product = null;
+      } else {
+        this.searchAttempted = true;
+        this.product = product;
+      }
     },
     onFindAlternatives(product) {
       this.$emit("find-alternatives", product);

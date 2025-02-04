@@ -11,6 +11,9 @@ importers:
       '@cynber/vitepress-valence':
         specifier: ^0.1.12
         version: 0.1.12(@iconify/vue@4.3.0(vue@3.5.13))(vitepress@1.6.3(@algolia/client-search@5.20.0)(postcss@8.5.1)(search-insights@2.17.3))(vue@3.5.13)
+      '@zxing/library':
+        specifier: 0.21.3
+        version: 0.21.3
       vue-barcode-reader:
         specifier: ^1.0.3
         version: 1.0.3
@@ -541,6 +544,10 @@ packages:
 
   '@zxing/library@0.19.3':
     resolution: {integrity: sha512-RUv5svewpDoD0ymXleOP8yVTO5BLkR0zn5coGC/Vs1671u0OBJ4xdtR8WVWf08OcvrieEMHdSfQY3ZKtqII/hg==}
+    engines: {node: '>= 10.4.0'}
+
+  '@zxing/library@0.21.3':
+    resolution: {integrity: sha512-hZHqFe2JyH/ZxviJZosZjV+2s6EDSY0O24R+FQmlWZBZXP9IqMo7S3nb3+2LBWxodJQkSurdQGnqE7KXqrYgow==}
     engines: {node: '>= 10.4.0'}
 
   '@zxing/text-encoding@0.9.0':
@@ -1269,6 +1276,12 @@ snapshots:
       - typescript
 
   '@zxing/library@0.19.3':
+    dependencies:
+      ts-custom-error: 3.3.1
+    optionalDependencies:
+      '@zxing/text-encoding': 0.9.0
+
+  '@zxing/library@0.21.3':
     dependencies:
       ts-custom-error: 3.3.1
     optionalDependencies:

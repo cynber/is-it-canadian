@@ -249,6 +249,7 @@ export default {
 
 .gray {
   background-color: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-divider);
   color: var(--vp-c-text-2);
 }
 
