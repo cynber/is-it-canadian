@@ -1,24 +1,25 @@
 <template>
-  <div class="barcode-scan-text">
-    <button class="btn-camera-open" @click="toggleCamera">
+  <!-- Barcode entry form -->
+  <div class="input-group">
+    <button class="scan-btn" @click="toggleCamera">
       <Icon icon="material-symbols:barcode-scanner-rounded" width="24" height="24" />
-      <span class="tooltip">Scan with camera</span>
+      <span class="scan-btn__tooltip">Scan with camera</span>
     </button>
 
     <input
       type="text"
-      class="barcode-input"
+      class="text-input"
       placeholder="Enter a barcode"
       v-model="barcode"
       @input="onInput"
     />
 
-    <button class="btn-text-search" @click="searchProduct">Search</button>
+    <button class="search-btn" @click="searchProduct">Search</button>
   </div>
 
   <!-- Camera scanner (hidden by default) -->
-  <div v-if="showCamera" class="camera-container">
-    <button class="close-camera" @click="toggleCamera">✕ Close Camera</button>
+  <div v-if="showCamera" class="camera">
+    <button class="camera-close" @click="toggleCamera">✕ Close Camera</button>
     <StreamBarcodeReader
       @decode="onDecode"
       @loaded="onLoaded"
@@ -31,20 +32,20 @@
     ></StreamBarcodeReader>
   </div>
 
-  <!-- Confirmation Modal -->
-  <div v-if="showConfirmation" class="confirmation-modal">
-    <div class="confirmation-content">
+  <!-- Confirmation Modal (hidden by default) -->
+  <div v-if="showConfirmation" class="modal">
+    <div class="modal-content">
       <h3>Barcode Detected</h3>
       <p>Found barcode: {{ barcode }}</p>
-      <div class="confirmation-buttons">
-        <button class="confirm-button" @click="confirmSearch">Search This Product</button>
-        <button class="cancel-button" @click="resumeScanning">Resume Scanning</button>
+      <div class="modal-buttons">
+        <button class="modal-confirm" @click="confirmSearch">Search This Product</button>
+        <button class="modal-cancel" @click="resumeScanning">Resume Scanning</button>
       </div>
     </div>
   </div>
 
   <!-- Image upload scanner -->
-  <div class="barcode-upload">
+  <div class="upload">
     <ImageBarcodeReader @decode="onDecode" @error="onError"></ImageBarcodeReader>
   </div>
 </template>
@@ -166,54 +167,8 @@ export default {
 </script>
 
 <style scoped>
-.confirmation-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.confirmation-content {
-  background-color: var(--vp-c-bg);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 90%;
-  width: 400px;
-  text-align: center;
-}
-
-.confirmation-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.confirm-button {
-  padding: 8px 16px;
-  background-color: var(--vp-button-brand-bg);
-  color: var(--vp-button-brand-text);
-  border: 1px solid var(--vp-button-brand-border);
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.cancel-button {
-  padding: 8px 16px;
-  background-color: var(--vp-c-bg);
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 4px;
-  cursor: pointer;
-}
-.barcode-scan-text {
+/* Layout Components */
+.input-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -228,7 +183,28 @@ export default {
   gap: 8px;
 }
 
-.btn-camera-open {
+.camera {
+  position: relative;
+  margin-top: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.upload {
+  margin-top: 16px;
+}
+
+/* Input Elements */
+.text-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Buttons */
+.scan-btn {
   padding: 8px;
   background-color: var(--vp-button-brand-bg);
   color: var(--vp-button-brand-text);
@@ -239,7 +215,7 @@ export default {
   font-size: 1.2rem;
 }
 
-.btn-camera-open .tooltip {
+.scan-btn__tooltip {
   visibility: hidden;
   position: absolute;
   bottom: -30px;
@@ -254,11 +230,34 @@ export default {
   z-index: 1;
 }
 
-.btn-camera-open:hover .tooltip {
+.scan-btn:hover .scan-btn__tooltip {
   visibility: visible;
 }
 
-.close-camera {
+.search-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+  border: 1px solid var(--vp-button-brand-border);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.search-btn:hover {
+  color: var(--vp-button-brand-hover-text);
+  background-color: var(--vp-button-brand-hover-bg);
+  border: 1px solid var(--vp-button-brand-hover-border);
+}
+
+.search-btn:active {
+  color: var(--vp-button-brand-active-text);
+  background-color: var(--vp-button-brand-active-bg);
+  border: 1px solid var(--vp-button-brand-active-border);
+}
+
+.camera-close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -271,61 +270,52 @@ export default {
   z-index: 1;
 }
 
-.camera-container {
-  position: relative;
-  margin-top: 16px;
-  border-radius: 8px;
-  overflow: hidden;
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.barcode-input {
-  flex: 1;
-  padding: 8px;
+.modal-content {
+  background-color: var(--vp-c-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  width: 400px;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.modal-confirm {
+  padding: 8px 16px;
+  background-color: var(--vp-button-brand-bg);
+  color: var(--vp-button-brand-text);
+  border: 1px solid var(--vp-button-brand-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-cancel {
+  padding: 8px 16px;
+  background-color: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
   border: 1px solid var(--vp-c-divider);
   border-radius: 4px;
-  font-size: 1rem;
-}
-
-.btn-text-search {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  color: var(--vp-button-brand-text);
-  background-color: var(--vp-button-brand-bg);
-  border: 1px solid var(--vp-button-brand-border);
-  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.btn-text-search:hover {
-  color: var(--vp-button-brand-hover-text);
-  background-color: var(--vp-button-brand-hover-bg);
-  border: 1px solid var(--vp-button-brand-hover-border);
-}
-
-.btn-text-search:active {
-  color: var(--vp-button-brand-active-text);
-  background-color: var(--vp-button-brand-active-bg);
-  border: 1px solid var(--vp-button-brand-active-border);
-}
-
-.camera-container {
-  margin-top: 16px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.barcode-upload {
-  margin-top: 16px;
-}
-
-.debug-info {
-  margin-top: 16px;
-  padding: 16px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  font-family: monospace;
-  white-space: pre-wrap;
 }
 </style>
