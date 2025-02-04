@@ -1,20 +1,45 @@
 <template>
-  <!-- Barcode entry form -->
-  <div class="input-group">
-    <button class="scan-btn" @click="toggleCamera">
-      <Icon icon="material-symbols:barcode-scanner-rounded" width="24" height="24" />
-      <span class="scan-btn__tooltip">Scan with camera</span>
-    </button>
+  <div class="barcode-entry">
+    <!-- First row -->
+    <div class="input-group__row">
+      <button
+        class="entry-btn scan-btn"
+        :class="{ 'scan-btn--active': barcode }"
+        @click="toggleCamera"
+      >
+        <Icon icon="material-symbols:barcode-scanner-rounded" width="24" height="24" />
+        Scan a code
+      </button>
 
-    <input
-      type="text"
-      class="text-input"
-      placeholder="Enter a barcode"
-      v-model="barcode"
-      @input="onInput"
-    />
+      <label class="entry-btn upload-btn">
+        <Icon icon="material-symbols:image" width="24" height="24" />
+        Upload Image
+        <ImageBarcodeReader
+          class="hidden-upload"
+          @decode="onDecode"
+          @error="onError"
+        ></ImageBarcodeReader>
+      </label>
+    </div>
 
-    <button class="search-btn" @click="searchProduct">Search</button>
+    <!-- Second row -->
+    <div class="input-group__row">
+      <input
+        type="text"
+        class="text-input"
+        placeholder="Enter a barcode"
+        v-model="barcode"
+        @input="onInput"
+      />
+      <button
+        class="entry-btn search-btn"
+        :class="{ 'search-btn--active': barcode }"
+        @click="searchProduct"
+      >
+        <Icon icon="mdi:search" width="24" height="24" />
+        Search
+      </button>
+    </div>
   </div>
 
   <!-- Camera scanner (hidden by default) -->
@@ -31,27 +56,11 @@
       }"
     ></StreamBarcodeReader>
   </div>
-
-  <!-- Confirmation Modal (hidden by default) -->
-  <div v-if="showConfirmation" class="modal">
-    <div class="modal-content">
-      <h3>Barcode Detected</h3>
-      <p>Found barcode: {{ barcode }}</p>
-      <div class="modal-buttons">
-        <button class="modal-confirm" @click="confirmSearch">Search This Product</button>
-        <button class="modal-cancel" @click="resumeScanning">Resume Scanning</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Image upload scanner -->
-  <div class="upload">
-    <ImageBarcodeReader @decode="onDecode" @error="onError"></ImageBarcodeReader>
-  </div>
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
+import { StreamBarcodeReader, ImageBarcodeReader } from 'vue-barcode-reader';
 
 export default {
   name: "BarcodeEntry",
@@ -62,13 +71,11 @@ export default {
       loading: false,
       error: null,
       showCamera: false,
-      showConfirmation: false,
     };
   },
   methods: {
     toggleCamera() {
       this.showCamera = !this.showCamera;
-      this.showConfirmation = false;
       if (!this.showCamera) {
         this.stopCamera();
       }
@@ -82,9 +89,6 @@ export default {
           video.srcObject = null;
         }
       }
-    },
-    onInput(event) {
-      // Handle input changes if needed
     },
     async searchProduct() {
       if (!this.barcode.trim()) {
@@ -113,48 +117,26 @@ export default {
         const data = await response.json();
 
         if (data.status === 1 && data.product) {
-          const product = data.product;
-          console.log("Product information:", product);
-          this.$emit("product-fetched", product);
+          this.$emit("product-fetched", data.product);
         } else {
           this.error = "No product found with this barcode.";
-          console.error("No product found with this barcode.");
           this.$emit("product-fetched", null);
         }
       } catch (err) {
         this.error = "An error occurred while fetching data.";
-        console.error("An error occurred while fetching data:", err);
         this.$emit("product-fetched", null);
       } finally {
         this.loading = false;
       }
     },
     onDecode(result) {
-      console.log("Decoded result:", result);
+      console.log("Decoded:", result);
+      console.log("Barcode:", result.text);
       if (result && result.text) {
         this.barcode = result.text;
-        // Close camera and clean up
         this.showCamera = false;
         this.stopCamera();
-        // Focus the search button
-        this.$nextTick(() => {
-          const searchButton = document.querySelector(".btn-text-search");
-          if (searchButton) {
-            searchButton.focus();
-          }
-        });
-      } else {
-        console.error("No barcode detected.");
       }
-    },
-    confirmSearch() {
-      this.showConfirmation = false;
-      this.stopCamera();
-      this.searchProduct();
-    },
-    resumeScanning() {
-      this.showConfirmation = false;
-      this.showCamera = true;
     },
     onLoaded() {
       console.log("Scanner is loaded and ready");
@@ -167,94 +149,84 @@ export default {
 </script>
 
 <style scoped>
-/* Layout Components */
-.input-group {
+.barcode-entry {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--vp-c-bg);
-  border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  padding: 8px 16px;
-  margin: -8px -8px 0px -8px;
-  width: calc(100% + 16px);
-  box-sizing: border-box;
+  flex-direction: column;
   gap: 8px;
+  width: calc(100% + 32px);
 }
 
+.input-group__row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.entry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.scan-btn {
+  flex: 1;
+  background-color: var(--vp-button-brand-bg);
+  color: var(--vp-button-brand-text);
+  border-color: var(--vp-button-brand-border);
+}
+
+.scan-btn--active {
+  color: var(--vp-button-alt-hover-text);
+  background-color: var(--vp-button-alt-hover-bg);
+  border-color: var(--vp-button-alt-hover-border);
+}
+
+.upload-btn {
+  flex: 1;
+  position: relative;
+  justify-content: center;
+}
+
+.hidden-upload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.text-input {
+  width: 66%;
+  padding: 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search-btn {
+  width: 34%;
+}
+
+.search-btn--active {
+  background-color: var(--vp-button-brand-bg);
+  color: var(--vp-button-brand-text);
+  border-color: var(--vp-button-brand-border);
+}
+
+/* Keep your existing camera styles */
 .camera {
   position: relative;
   margin-top: 16px;
   border-radius: 8px;
   overflow: hidden;
-}
-
-.upload {
-  margin-top: 16px;
-}
-
-/* Input Elements */
-.text-input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-/* Buttons */
-.scan-btn {
-  padding: 8px;
-  background-color: var(--vp-button-brand-bg);
-  color: var(--vp-button-brand-text);
-  border: 1px solid var(--vp-button-brand-border);
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  font-size: 1.2rem;
-}
-
-.scan-btn__tooltip {
-  visibility: hidden;
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--vp-c-text-1);
-  color: var(--vp-c-bg);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  z-index: 1;
-}
-
-.scan-btn:hover .scan-btn__tooltip {
-  visibility: visible;
-}
-
-.search-btn {
-  padding: 8px 16px;
-  border-radius: 4px;
-  color: var(--vp-button-brand-text);
-  background-color: var(--vp-button-brand-bg);
-  border: 1px solid var(--vp-button-brand-border);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.search-btn:hover {
-  color: var(--vp-button-brand-hover-text);
-  background-color: var(--vp-button-brand-hover-bg);
-  border: 1px solid var(--vp-button-brand-hover-border);
-}
-
-.search-btn:active {
-  color: var(--vp-button-brand-active-text);
-  background-color: var(--vp-button-brand-active-bg);
-  border: 1px solid var(--vp-button-brand-active-border);
 }
 
 .camera-close {
@@ -268,54 +240,5 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   z-index: 1;
-}
-
-/* Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: var(--vp-c-bg);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 90%;
-  width: 400px;
-  text-align: center;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.modal-confirm {
-  padding: 8px 16px;
-  background-color: var(--vp-button-brand-bg);
-  color: var(--vp-button-brand-text);
-  border: 1px solid var(--vp-button-brand-border);
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.modal-cancel {
-  padding: 8px 16px;
-  background-color: var(--vp-c-bg);
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 4px;
-  cursor: pointer;
 }
 </style>
