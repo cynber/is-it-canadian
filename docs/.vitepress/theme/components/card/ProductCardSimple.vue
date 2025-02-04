@@ -9,7 +9,7 @@
         >: {{ product.name }}
       </div>
       <div class="origin-info">
-        <strong>Origin: </strong>
+        <strong>Ingredients: </strong>
         <span :class="{ 'missing-data': product.origins === 'Origin not specified' }">
           {{ product.origins }}
         </span>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "ProductCard",
+  name: "ProductCardSimple",
   props: {
     product: {
       type: Object,
