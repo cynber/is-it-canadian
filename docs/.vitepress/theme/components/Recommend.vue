@@ -1,23 +1,23 @@
 <template>
-  <HorizontalContainer>
-    <HeaderCard title="Canadian Alternatives" :centered="true" v-if="!showAlternatives">
+  <VpvContainerHorizontal headerTitle="Canadian Alternatives">
+    <div :centered="true" v-if="!showAlternatives">
       <div class="placeholder-text">
         Search for a product first to see Canadian alternatives
       </div>
-    </HeaderCard>
+    </div>
     <template v-else>
-      <HeaderCard title="Canadian Alternatives">
-        <div class="controls">
-          <button class="refresh-button" @click="refreshResults">Refresh Results</button>
-        </div>
-      </HeaderCard>
+      <div class="controls">
+        <button class="refresh-button" @click="refreshResults">
+          Refresh Results
+        </button>
+      </div>
       <div v-if="loading" class="loading">Loading...</div>
       <template v-else>
         <div v-if="filteredAlternatives.length === 0" class="no-results">
-          We could not find any Canadian alternatives for this product based on its
-          categories. You can
-          <a href="/guide/#add-product-information">edit this item</a> to update its
-          categories, and then try again later.
+          We could not find any Canadian alternatives for this product based on
+          its categories. You can
+          <a href="/guide/#add-product-information">edit this item</a> to update
+          its categories, and then try again later.
         </div>
         <template v-else>
           <div class="category-filters">
@@ -42,8 +42,8 @@
             </div>
             <div class="filter-section">
               <div class="category-filter-info">
-                The product you looked up had the following categories. You can click on them to further
-                filter the results:
+                The product you looked up had the following categories. You can
+                click on them to further filter the results:
               </div>
               <button
                 v-for="category in uniqueCategories"
@@ -68,7 +68,11 @@
               >
                 ←
               </button>
-              <button class="pagination-button" :disabled="isLastPage" @click="nextPage">
+              <button
+                class="pagination-button"
+                :disabled="isLastPage"
+                @click="nextPage"
+              >
                 →
               </button>
             </div>
@@ -93,7 +97,11 @@
               >
                 ←
               </button>
-              <button class="pagination-button" :disabled="isLastPage" @click="nextPage">
+              <button
+                class="pagination-button"
+                :disabled="isLastPage"
+                @click="nextPage"
+              >
                 →
               </button>
             </div>
@@ -101,18 +109,17 @@
         </template>
       </template>
     </template>
-  </HorizontalContainer>
+  </VpvContainerHorizontal>
 </template>
 
 <script>
-import { HeaderCard, HorizontalContainer } from "@cynber/vitepress-valence";
+import { VpvContainerHorizontal } from "@cynber/vitepress-valence";
 import ProductCardSimple from "./card/ProductCardSimple.vue";
 
 export default {
   name: "Recommend",
   components: {
-    HorizontalContainer,
-    HeaderCard,
+    VpvContainerHorizontal,
     ProductCardSimple,
   },
   data() {
@@ -146,7 +153,8 @@ export default {
         let matchesCanadianFilters = true;
         if (this.canadianFilters.ingredients) {
           matchesCanadianFilters =
-            matchesCanadianFilters && product.origins?.toLowerCase().includes("canada");
+            matchesCanadianFilters &&
+            product.origins?.toLowerCase().includes("canada");
         }
         if (this.canadianFilters.manufacturing) {
           matchesCanadianFilters =
@@ -158,7 +166,10 @@ export default {
       });
     },
     currentPageProducts() {
-      return this.filteredAlternatives.slice(this.paginationStart, this.paginationEnd);
+      return this.filteredAlternatives.slice(
+        this.paginationStart,
+        this.paginationEnd
+      );
     },
     paginationStart() {
       return this.currentPage * this.itemsPerPage;
@@ -218,7 +229,11 @@ export default {
       this.currentPage = 0;
     },
 
-    async searchWithCategory(category, hasCanadianIngredients, hasCanadianManufacturing) {
+    async searchWithCategory(
+      category,
+      hasCanadianIngredients,
+      hasCanadianManufacturing
+    ) {
       let searchUrl = new URL("https://world.openfoodfacts.org/api/v2/search");
       let params = new URLSearchParams({
         fields:
@@ -251,8 +266,8 @@ export default {
       this.loading = true;
       this.showAlternatives = true;
 
-      this.sourceCategories = (sourceProduct.categories_hierarchy || []).map((cat) =>
-        cat.replace("en:", "").replace("fr:", "")
+      this.sourceCategories = (sourceProduct.categories_hierarchy || []).map(
+        (cat) => cat.replace("en:", "").replace("fr:", "")
       );
 
       this.selectedCategories = [...this.sourceCategories];
@@ -294,7 +309,9 @@ export default {
             );
           });
 
-          console.log(`Found ${results.length} results for category ${category}`);
+          console.log(
+            `Found ${results.length} results for category ${category}`
+          );
 
           if (results.length >= 5) {
             console.log("Found enough results, stopping category traversal");
@@ -356,18 +373,16 @@ export default {
   margin-top: 10px;
 }
 .controls {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
   width: 100%;
 }
 
 .refresh-button {
+  width: 100%;
   padding: 8px 16px;
-  background-color: var(--vp-c-brand);
-  color: white;
-  border: none;
-  border-radius: 4px;
+  background-color: var(--vp-c-divider);
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 14px;
   cursor: pointer;
   display: inline-block;
 }
@@ -379,8 +394,8 @@ export default {
   padding: 12px;
   background-color: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  margin: -16px auto;
+  border-radius: 14px;
+  margin: auto;
 }
 
 .category-filter-info {
@@ -401,7 +416,7 @@ export default {
 .category-pill {
   padding: 4px 12px;
   margin: 4px;
-  border-radius: 16px;
+  border-radius: 14px;
   border: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg);
   color: var(--vp-c-text-2);
@@ -435,7 +450,7 @@ export default {
   background-color: var(--vp-button-brand-bg);
   color: var(--vp-button-brand-text);
   border: 1px solid var(--vp-button-brand-border);
-  border-radius: 4px;
+  border-radius: 14px;
   cursor: pointer;
 }
 
@@ -447,8 +462,8 @@ export default {
 
 .product-cards {
   background: var(--vp-c-bg-alt);
-  margin: -24px auto;
-  border-radius: 8px;
+  margin: auto;
+  border-radius: 14px;
   border: 1px solid var(--vp-c-divider);
 }
 </style>

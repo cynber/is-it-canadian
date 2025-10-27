@@ -194,7 +194,6 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: calc(100% + 32px);
 }
 
 .input-group__row {
@@ -209,7 +208,7 @@ export default {
   justify-content: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 14px;
   border: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg);
   color: var(--vp-c-text-1);
@@ -222,19 +221,20 @@ export default {
   flex: 1;
   background-color: var(--vp-button-brand-bg);
   color: var(--vp-button-brand-text);
-  border-color: var(--vp-button-brand-border);
+  border: 2px solid var(--vp-c-divider);
 }
 
 .scan-btn--active {
   color: var(--vp-button-alt-hover-text);
   background-color: var(--vp-button-alt-hover-bg);
-  border-color: var(--vp-button-alt-hover-border);
+  border: 2px solid var(--vp-c-border);
 }
 
 .upload-btn {
   flex: 1;
   position: relative;
   justify-content: center;
+  border: 2px solid var(--vp-c-divider);
 }
 
 .hidden-upload {
@@ -247,26 +247,26 @@ export default {
 .text-input {
   width: 66%;
   padding: 8px;
-  border: 1px solid var(--vp-c-divider);
+  border: 2px solid var(--vp-c-divider);
   border-radius: 4px;
   font-size: 1rem;
 }
 
 .search-btn {
   width: 34%;
+  border: 2px solid var(--vp-c-divider);
 }
 
 .search-btn--active {
   background-color: var(--vp-button-brand-bg);
   color: var(--vp-button-brand-text);
-  border-color: var(--vp-button-brand-border);
+  border: 2px solid var(--vp-c-border);
 }
 
-/* Keep your existing camera styles */
 .camera {
   position: relative;
   margin-top: 16px;
-  border-radius: 8px;
+  border-radius: 14px;
   overflow: hidden;
 }
 
@@ -278,7 +278,7 @@ export default {
   background-color: var(--vp-c-danger);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 14px;
   cursor: pointer;
   z-index: 1;
 }
@@ -287,7 +287,7 @@ export default {
   width: 100%;
   background-color: var(--vp-button-brand-bg);
   color: var(--vp-button-brand-text);
-  border-color: var(--vp-button-brand-border);
+  border: 2px solid var(--vp-c-divider);
   padding: 12px 24px;
   font-size: 1.1rem;
 }

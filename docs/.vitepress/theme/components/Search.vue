@@ -1,25 +1,25 @@
 <template>
-  <VerticalContainer>
-    <HeaderCard title="Search for a product" />
+  <VpvContainerVertical
+    headerTitle="Search for a product"
+  >
     <BarcodeInput @product-fetched="onProductFetched" />
     <ProductCardOrigin
       v-if="searchAttempted"
       :product="product"
       @find-alternatives="onFindAlternatives"
     />
-  </VerticalContainer>
+  </VpvContainerVertical>
 </template>
 
 <script>
-import { HeaderCard, VerticalContainer } from "@cynber/vitepress-valence";
+import { VpvContainerVertical } from "@cynber/vitepress-valence";
 import BarcodeInput from "./search/BarcodeInput.vue";
 import ProductCardOrigin from "./card/ProductCardOrigin.vue";
 
 export default {
   name: "Search",
   components: {
-    HeaderCard,
-    VerticalContainer,
+    VpvContainerVertical,
     BarcodeInput,
     ProductCardOrigin,
   },

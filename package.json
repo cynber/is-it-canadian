@@ -11,7 +11,7 @@
     "vue": "^3.5.22"
   },
   "dependencies": {
-    "@cynber/vitepress-valence": "^0.1.13",
+    "@cynber/vitepress-valence": "^0.2.0",
     "@zxing/library": "0.21.3"
   }
 }

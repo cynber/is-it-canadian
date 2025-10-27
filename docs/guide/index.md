@@ -16,6 +16,13 @@ You can contribute by adding products or updating information with their [mobile
 
 ### Write an article / blog post
 
-You can see our [community section](/community) for to see what we have so far. Searching for products alone can be tedious, so we are looking for people to write guides and compilations on specific categories.
+You can see our [community section](community) for to see what we have so far. Searching for products alone can be tedious, so we are looking for people to write guides and compilations on specific categories.
 
 For example, if you know a lot about Canadian ice cream, you can write a guide or a list of recommendations.
+
+## Credits
+
+::: details Images & Icons
+
+- <a href="https://www.flaticon.com/free-icons/moose" title="moose icons">Moose icons created by microstd - Flaticon</a>
+:::

@@ -78,7 +78,7 @@ video {
   width: 100%;
   max-height: 100%;
   border: 2px solid var(--vp-c-divider);
-  border-radius: 8px;
+  border-radius: 14px;
 }
 
 .overlay-element {

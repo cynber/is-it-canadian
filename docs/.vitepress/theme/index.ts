@@ -7,18 +7,12 @@ import '@cynber/vitepress-valence/style.css'
 
 import { Icon } from '@iconify/vue'
 import { 
-  BlogPostHeader,
-  BlogPostList,
-  HeaderCard,
-  VerticalContainer,
-  HorizontalContainer,
-  VerticalCard,
-  HorizontalCard,
-  EmbedLemmy
+  VpvContainerHorizontal,
+  VpvContainerVertical,
+  VpvCardHorizontal,
+  VpvCardVertical,
+  VpvEmbedLemmy
 } from '@cynber/vitepress-valence';
-
-import authors from './data/authors.js'
-import { data as postsData } from './data/posts.data.js'
 
 import SearchAndRecommend from './components/SearchAndRecommend.vue'
 
@@ -32,18 +26,13 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // Imported
     app.component('Icon', Icon)
-    app.component('BlogPostHeader', BlogPostHeader)
-    app.component('BlogPostList', BlogPostList)
-    app.component('HeaderCard', HeaderCard)
-    app.component('VerticalContainer', VerticalContainer)
-    app.component('HorizontalContainer', HorizontalContainer)
-    app.component('VerticalCard', VerticalCard)
-    app.component('HorizontalCard', HorizontalCard)
-    app.component('EmbedLemmy', EmbedLemmy)
+    app.component('VpvContainerHorizontal', VpvContainerHorizontal)
+    app.component('VpvContainerVertical', VpvContainerVertical)
+    app.component('VpvCardHorizontal', VpvCardHorizontal)
+    app.component('VpvCardVertical', VpvCardVertical)
+    app.component('VpvEmbedLemmy', VpvEmbedLemmy)
 
     // Custom
     app.component('SearchAndRecommend', SearchAndRecommend)
-    app.provide('authors', authors)
-    app.provide('postsData', postsData)
   }
 } satisfies Theme

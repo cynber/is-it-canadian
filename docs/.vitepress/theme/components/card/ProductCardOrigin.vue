@@ -165,8 +165,8 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin: -16px auto 0;
-  border-radius: 8px;
+  margin: auto 0;
+  border-radius: 14px;
   background-color: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -178,7 +178,7 @@ export default {
   height: 200px;
   margin-bottom: 20px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,7 +188,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 14px;
 }
 
 .product-image.landscape {
@@ -211,13 +211,13 @@ export default {
   margin-bottom: 15px;
   width: 100%;
   background-color: var(--vp-c-bg-soft);
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 15px;
 }
 
 .location-section {
   background-color: var(--vp-c-bg-soft);
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 15px;
   margin-bottom: 10px;
 }
@@ -238,7 +238,7 @@ export default {
 
 .pill {
   padding: 5px 10px;
-  border-radius: 4px;
+  border-radius: 14px;
   font-size: 0.9em;
 }
 
@@ -279,10 +279,10 @@ a:hover {
 .find-alternatives-button {
   padding: 8px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 14px;
   color: var(--vp-button-brand-text);
   background-color: var(--vp-button-brand-bg);
-  border: 1px solid var(--vp-button-brand-border);
+  border: 2px solid var(--vp-c-divider);
   font-size: 1rem;
   cursor: pointer;
 }

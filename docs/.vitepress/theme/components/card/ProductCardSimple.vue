@@ -44,7 +44,7 @@ export default {
 <style scoped>
 .product-card {
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 20px;
   margin: 10px;
   display: flex;
@@ -63,7 +63,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 14px;
 }
 
 .product-info {
