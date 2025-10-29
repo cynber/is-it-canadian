@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@cynber/vitepress-valence':
-        specifier: ^0.2.0
-        version: 0.2.0(@iconify/vue@4.3.0(vue@3.5.22))(vitepress@1.6.4(@algolia/client-search@5.41.0)(postcss@8.5.6)(search-insights@2.17.3))(vue@3.5.22)
+        specifier: ^0.2.1
+        version: 0.2.1(@iconify/vue@4.3.0(vue@3.5.22))(vitepress@1.6.4(@algolia/client-search@5.41.0)(postcss@8.5.6)(search-insights@2.17.3))(vue@3.5.22)
       '@zxing/library':
         specifier: 0.21.3
         version: 0.21.3
@@ -120,8 +120,8 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@cynber/vitepress-valence@0.2.0':
-    resolution: {integrity: sha512-+QTZsy5qY7BWaJiXSWvGmUqvN1WpOe8nDwrYq+RcRvH6bjy0US+XiCgCuzG/UW0t6Adl/fsMVBo0p677ecA4Bg==}
+  '@cynber/vitepress-valence@0.2.1':
+    resolution: {integrity: sha512-5qzAYJyD+9npjLqnBx8YEmSbw6C6cXnyhQKTa4/GsoWU7VB/wd3hCDW73UvTViuqmUBfXEfjYf5Mu1AxHw7oGg==}
     peerDependencies:
       '@iconify/vue': ^4.1.2
       vitepress: ^1.0.0
@@ -288,8 +288,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@iconify-json/simple-icons@1.2.55':
-    resolution: {integrity: sha512-9vc04pmup/zcef8hDypWU8nMwMaFVkWuUzWkxyL++DVp5AA8baoJHK6RyKN1v+cvfR2agxkUb053XVggzFFkTA==}
+  '@iconify-json/simple-icons@1.2.56':
+    resolution: {integrity: sha512-oAvxOzgSjfvdj/Jsi3S7HDUCxO8/n2j8e1w1e/FktHUAXiWjNX00n3Tu3AP+n1ayKrypcUDXCzxn+0ENMl6ouw==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -738,8 +738,8 @@ packages:
   stringify-entities@4.0.4:
     resolution: {integrity: sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==}
 
-  superjson@2.2.3:
-    resolution: {integrity: sha512-ay3d+LW/S6yppKoTz3Bq4mG0xrS5bFwfWEBmQfbC7lt5wmtk+Obq0TxVuA9eYRirBTQb1K3eEpBRHMQEo0WyVw==}
+  superjson@2.2.5:
+    resolution: {integrity: sha512-zWPTX96LVsA/eVYnqOM2+ofcdPqdS1dAF1LN4TS2/MWuUpfitd9ctTa87wt4xrYnZnkLtS69xpBdSxVBP5Rm6w==}
     engines: {node: '>=16'}
 
   tabbable@6.3.0:
@@ -954,7 +954,7 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@cynber/vitepress-valence@0.2.0(@iconify/vue@4.3.0(vue@3.5.22))(vitepress@1.6.4(@algolia/client-search@5.41.0)(postcss@8.5.6)(search-insights@2.17.3))(vue@3.5.22)':
+  '@cynber/vitepress-valence@0.2.1(@iconify/vue@4.3.0(vue@3.5.22))(vitepress@1.6.4(@algolia/client-search@5.41.0)(postcss@8.5.6)(search-insights@2.17.3))(vue@3.5.22)':
     dependencies:
       '@iconify/vue': 4.3.0(vue@3.5.22)
       date-fns: 4.1.0
@@ -1056,7 +1056,7 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@iconify-json/simple-icons@1.2.55':
+  '@iconify-json/simple-icons@1.2.56':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -1247,7 +1247,7 @@ snapshots:
       mitt: 3.0.1
       perfect-debounce: 1.0.0
       speakingurl: 14.0.1
-      superjson: 2.2.3
+      superjson: 2.2.5
 
   '@vue/devtools-shared@7.7.7':
     dependencies:
@@ -1546,7 +1546,7 @@ snapshots:
       character-entities-html4: 2.1.0
       character-entities-legacy: 3.0.0
 
-  superjson@2.2.3:
+  superjson@2.2.5:
     dependencies:
       copy-anything: 4.0.5
 
@@ -1601,7 +1601,7 @@ snapshots:
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.41.0)(search-insights@2.17.3)
-      '@iconify-json/simple-icons': 1.2.55
+      '@iconify-json/simple-icons': 1.2.56
       '@shikijs/core': 2.5.0
       '@shikijs/transformers': 2.5.0
       '@shikijs/types': 2.5.0
