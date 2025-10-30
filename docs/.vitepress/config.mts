@@ -18,9 +18,6 @@ export default defineConfig({
   vite: {
     ssr: { noExternal: ["@cynber/vitepress-valence"] },
   },
-  rewrites: {
-    'product-search.md': 'index.md'
-  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
