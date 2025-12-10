@@ -8,10 +8,10 @@
   "devDependencies": {
     "@iconify/vue": "^4.3.0",
     "vitepress": "^1.6.4",
-    "vue": "^3.5.22"
+    "vue": "^3.5.25"
   },
   "dependencies": {
-    "@cynber/vitepress-valence": "^0.2.1",
+    "@cynber/vitepress-valence": "^0.2.2",
     "@zxing/library": "0.21.3"
   }
 }
