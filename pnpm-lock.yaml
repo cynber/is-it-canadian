@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@cynber/vitepress-valence':
         specifier: ^0.2.2
-        version: 0.2.2(@iconify/vue@4.3.0(vue@3.5.29))(vitepress@1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.6)(search-insights@2.17.3))(vue@3.5.29)
+        version: 0.2.2(@iconify/vue@4.3.0(vue@3.5.29))(vitepress@1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.8)(search-insights@2.17.3))(vue@3.5.29)
       '@zxing/library':
         specifier: 0.21.3
         version: 0.21.3
@@ -20,7 +20,7 @@ importers:
         version: 4.3.0(vue@3.5.29)
       vitepress:
         specifier: ^1.6.4
-        version: 1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.6)(search-insights@2.17.3)
+        version: 1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.8)(search-insights@2.17.3)
       vue:
         specifier: ^3.5.29
         version: 3.5.29
@@ -288,8 +288,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@iconify-json/simple-icons@1.2.71':
-    resolution: {integrity: sha512-rNoDFbq1fAYiEexBvrw613/xiUOPEu5MKVV/X8lI64AgdTzLQUUemr9f9fplxUMPoxCBP2rWzlhOEeTHk/Sf0Q==}
+  '@iconify-json/simple-icons@1.2.72':
+    resolution: {integrity: sha512-wkcixntHvaCoqPqerGrNFcHQ3Yx1ux4ZkhscCDK0DEHpP62XCH+cxq1HTsRjbUiQl/M9K8bj03HF6Wgn5iE2rQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -719,8 +719,8 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  postcss@8.5.6:
-    resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
+  postcss@8.5.8:
+    resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
     engines: {node: ^10 || ^12 || >=14}
 
   preact@10.28.4:
@@ -982,13 +982,13 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@cynber/vitepress-valence@0.2.2(@iconify/vue@4.3.0(vue@3.5.29))(vitepress@1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.6)(search-insights@2.17.3))(vue@3.5.29)':
+  '@cynber/vitepress-valence@0.2.2(@iconify/vue@4.3.0(vue@3.5.29))(vitepress@1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.8)(search-insights@2.17.3))(vue@3.5.29)':
     dependencies:
       '@iconify/vue': 4.3.0(vue@3.5.29)
       date-fns: 4.1.0
       medium-zoom: 1.1.0
       photoswipe: 5.4.4
-      vitepress: 1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.6)(search-insights@2.17.3)
+      vitepress: 1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.8)(search-insights@2.17.3)
       vue: 3.5.29
 
   '@docsearch/css@3.8.2': {}
@@ -1084,7 +1084,7 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@iconify-json/simple-icons@1.2.71':
+  '@iconify-json/simple-icons@1.2.72':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -1264,7 +1264,7 @@ snapshots:
       '@vue/shared': 3.5.29
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.6
+      postcss: 8.5.8
       source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.5.29':
@@ -1509,7 +1509,7 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  postcss@8.5.6:
+  postcss@8.5.8:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
@@ -1632,16 +1632,16 @@ snapshots:
   vite@5.4.21:
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.5.6
+      postcss: 8.5.8
       rollup: 4.59.0
     optionalDependencies:
       fsevents: 2.3.3
 
-  vitepress@1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.6)(search-insights@2.17.3):
+  vitepress@1.6.4(@algolia/client-search@5.49.1)(postcss@8.5.8)(search-insights@2.17.3):
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.49.1)(search-insights@2.17.3)
-      '@iconify-json/simple-icons': 1.2.71
+      '@iconify-json/simple-icons': 1.2.72
       '@shikijs/core': 2.5.0
       '@shikijs/transformers': 2.5.0
       '@shikijs/types': 2.5.0
@@ -1658,7 +1658,7 @@ snapshots:
       vite: 5.4.21
       vue: 3.5.29
     optionalDependencies:
-      postcss: 8.5.6
+      postcss: 8.5.8
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
