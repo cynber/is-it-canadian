@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@cynber/vitepress-valence": "^0.2.2",
+    "@lucide/vue": "^1.33.0",
     "@zxing/library": "^0.23.0"
   }
 }

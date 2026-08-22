@@ -9,12 +9,12 @@
           :class="{ 'scan-btn--active': barcode }"
           @click="toggleCamera"
         >
-          <Icon icon="material-symbols:barcode-scanner-rounded" width="24" height="24" />
+          <ScanBarcode :size="24" />
           Scan a code
         </button>
 
         <label class="entry-btn upload-btn">
-          <Icon icon="material-symbols:image" width="24" height="24" />
+          <Image :size="24" />
           Upload Image
           <ImageScanner
             class="hidden-upload"
@@ -24,7 +24,7 @@
         </label>
 
         <button class="entry-btn manual-btn" @click="showManualEntry = true">
-          <Icon icon="material-symbols:keyboard-rounded" width="24" height="24" />
+          <Keyboard :size="24" />
           Enter a barcode manually
         </button>
       </div>
@@ -44,7 +44,7 @@
           :class="{ 'search-btn--active': barcode }"
           @click="searchProduct"
         >
-          <Icon icon="mdi:search" width="24" height="24" />
+          <Search :size="24" />
           Search
         </button>
       </div>
@@ -53,7 +53,7 @@
     <!-- Show this when searching -->
     <template v-else>
       <button class="entry-btn reset-btn" @click="resetSearch">
-        <Icon icon="tabler:trash" width="24" height="24" />
+        <Trash2 :size="24" />
         Search for another product
       </button>
     </template>
@@ -77,14 +77,18 @@
 </template>
 
 <script>
-import { Icon } from "@iconify/vue";
+import { Image, Keyboard, ScanBarcode, Search, Trash2 } from "@lucide/vue";
 import ImageScanner from "./ImageScanner.vue";
 import StreamScanner from "./StreamScanner.vue";
 
 export default {
   name: "BarcodeInput",
   components: {
-    Icon,
+    Image,
+    Keyboard,
+    ScanBarcode,
+    Search,
+    Trash2,
     ImageScanner,
     StreamScanner,
   },

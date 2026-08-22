@@ -11,6 +11,9 @@ importers:
       '@cynber/vitepress-valence':
         specifier: ^0.2.2
         version: 0.2.2(@iconify/vue@4.3.0(vue@3.5.41))(vitepress@1.6.4(@algolia/client-search@5.57.0)(postcss@8.5.26)(search-insights@2.17.3))(vue@3.5.41)
+      '@lucide/vue':
+        specifier: ^1.33.0
+        version: 1.33.0(vue@3.5.41)
       '@zxing/library':
         specifier: ^0.23.0
         version: 0.23.0
@@ -301,6 +304,11 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
+  '@lucide/vue@1.33.0':
+    resolution: {integrity: sha512-8d3HnIIglHnosvsnm+IWNy8XhYYJvkf4YEgQqb74HnY3ihzdz+7XX4MxMZoyKdw7pbKOGno2HoaHTq7DH/v5AA==}
+    peerDependencies:
+      vue: '>=3.0.1'
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     resolution: {integrity: sha512-oTXEIha4SsuXdTA4Iyskj0kpdx2yVXdhd75c2v3xGrHFfVMsbhTPZU/nMPL4sWKo4pBHm3aucLaqGlF696dTyQ==}
@@ -1103,6 +1111,10 @@ snapshots:
       vue: 3.5.41
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
+
+  '@lucide/vue@1.33.0(vue@3.5.41)':
+    dependencies:
+      vue: 3.5.41
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true

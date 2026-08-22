@@ -5,17 +5,17 @@ layout: home
 hero:
   name: "Is it Canadian"
   # text: ""
-  tagline: Using the Open Food Facts database, we can help you check if a product is Canadian and find alternatives if needed!
+  tagline: Powered by the Open Food Facts project, this tool can help you find information on if a product is Canadian, and search for similar Canadian products
   image: /icon/moose-home.png
   actions:
     # - theme: brand
     #   text: Search for a product
     #   link: /product-search
     - theme: brand
-      text: How you can help
+      text: Contribute your knowledge
       link: /guide/#contribute
     - theme: alt
-      text: Fund Development 🍁
+      text: Fund my work
       link: https://www.ko-fi.com/cynber
 
 head:
@@ -38,7 +38,6 @@ head:
 # Try it out:
 
 You can search for a product and click 'Find Canadian Alternatives' to get a list of products made or sourced from Canada.
-
 
 <SearchAndRecommend />
 
