@@ -166,11 +166,13 @@ export default {
   flex-direction: column;
   padding: 20px;
   margin: auto 0;
-  border-radius: 14px;
+  border-radius: 16px;
   background-color: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-divider);
+  border: 2px solid var(--vp-c-divider);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 .product-image-container {
@@ -178,17 +180,21 @@ export default {
   height: 200px;
   margin-bottom: 20px;
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0.7rem;
+  padding-bottom: 0;
+  box-sizing: border-box;
 }
 
 .product-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 10px;
+  border: 2px solid var(--vp-c-divider);
 }
 
 .product-image.landscape {
@@ -210,13 +216,15 @@ export default {
   font-size: 1.2em;
   margin-bottom: 15px;
   width: 100%;
-  background-color: var(--vp-c-bg-soft);
+  background-color: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
   border-radius: 14px;
   padding: 15px;
 }
 
 .location-section {
-  background-color: var(--vp-c-bg-soft);
+  background-color: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
   border-radius: 14px;
   padding: 15px;
   margin-bottom: 10px;
@@ -237,20 +245,31 @@ export default {
 }
 
 .pill {
-  padding: 5px 10px;
-  border-radius: 14px;
-  font-size: 0.9em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .green {
-  background-color: var(--vp-c-red-3);
-  color: var(--vp-button-brand-text);
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-green-1);
+  border: 2px solid var(--vp-c-green-soft);
+  font-weight: 600;
+}
+
+.green:hover {
+  border-color: var(--vp-c-green-3);
 }
 
 .gray {
-  background-color: var(--vp-c-bg-alt);
-  border: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg-soft);
+  border: 2px solid var(--vp-c-divider);
   color: var(--vp-c-text-2);
+}
+
+.gray:hover {
+  border-color: var(--vp-c-border);
 }
 
 .product-not-found {

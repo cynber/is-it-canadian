@@ -43,27 +43,37 @@ export default {
 
 <style scoped>
 .product-card {
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 14px;
+  border: 2px solid var(--vp-c-divider);
+  border-radius: 16px;
   padding: 20px;
   margin: 10px;
   display: flex;
   gap: 20px;
   background-color: var(--vp-c-bg);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  border-color: var(--vp-c-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
   width: 120px;
   height: 120px;
   flex-shrink: 0;
+  padding: 0.7rem;
+  box-sizing: border-box;
 }
 
 .product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 10px;
+  border: 2px solid var(--vp-c-divider);
 }
 
 .product-info {

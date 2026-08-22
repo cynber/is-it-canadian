@@ -414,21 +414,26 @@ export default {
 }
 
 .category-pill {
-  padding: 4px 12px;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
   margin: 4px;
-  border-radius: 14px;
+  border-radius: 1rem;
   border: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg);
   color: var(--vp-c-text-2);
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 0.85rem;
   transition: all 0.2s;
 }
 
+.category-pill:hover {
+  border-color: var(--vp-c-border);
+}
+
 .category-pill.active {
-  background-color: var(--vp-button-brand-bg);
-  color: var(--vp-button-brand-text);
-  border-color: var(--vp-button-brand-border);
+  border-color: var(--vp-c-brand);
+  color: var(--vp-c-text-1);
+  font-weight: 500;
 }
 
 .pagination-info {
@@ -463,7 +468,7 @@ export default {
 .product-cards {
   background: var(--vp-c-bg-alt);
   margin: auto;
-  border-radius: 14px;
-  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  border: 2px solid var(--vp-c-divider);
 }
 </style>

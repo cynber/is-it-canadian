@@ -1,6 +1,7 @@
 node_modules
 .vscode
 local-test
+notes
 
 # recommended by vitepress
 docs/.vitepress/dist

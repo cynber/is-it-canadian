@@ -87,7 +87,7 @@ video {
   width: 100%;
   max-height: 100%;
   border: 2px solid var(--vp-c-divider);
-  border-radius: 14px;
+  border-radius: 10px;
 }
 
 .overlay-element {
@@ -113,12 +113,12 @@ video {
 .laser {
   width: 60%;
   margin-left: 20%;
-  background-color: tomato;
+  background-color: var(--vp-c-brand-1);
   height: 1px;
   position: absolute;
   top: 40%;
   z-index: 2;
-  box-shadow: 0 0 4px red;
+  box-shadow: 0 0 4px var(--vp-c-brand-1);
   animation: scanning 2s infinite;
 }
 
