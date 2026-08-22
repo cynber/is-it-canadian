@@ -11,11 +11,18 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { BrowserMultiFormatReader } from "@zxing/library";
+import { shallowRef } from "vue";
 
-const codeReader = ref(new BrowserMultiFormatReader());
+const codeReader = shallowRef();
 const emit = defineEmits(["decode", "error"]);
+
+const getCodeReader = async () => {
+  if (!codeReader.value) {
+    const { BrowserMultiFormatReader } = await import("@zxing/library");
+    codeReader.value = new BrowserMultiFormatReader();
+  }
+  return codeReader.value;
+};
 
 const onChangeInput = (e) => {
   const files = e.target.files || e.dataTransfer.files;
@@ -33,7 +40,8 @@ const processFile = async (e) => {
   document.body.appendChild(img);
 
   try {
-    const result = await codeReader.value.decodeFromImage("temp-image");
+    const reader = await getCodeReader();
+    const result = await reader.decodeFromImage("temp-image");
     emit("decode", result);
   } catch (error) {
     emit("error", error);

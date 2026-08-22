@@ -11,8 +11,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { BrowserMultiFormatReader } from "@zxing/library";
+import { ref, shallowRef, onMounted, onBeforeUnmount } from "vue";
+
+const codeReader = shallowRef();
+
+const getCodeReader = async () => {
+  if (!codeReader.value) {
+    const { BrowserMultiFormatReader } = await import("@zxing/library");
+    codeReader.value = new BrowserMultiFormatReader();
+  }
+  return codeReader.value;
+};
 
 const props = defineProps({
   constraints: {
@@ -28,11 +37,11 @@ const props = defineProps({
 const emit = defineEmits(["decode", "loaded", "error"]);
 const scanner = ref(null);
 const isLoading = ref(true);
-const codeReader = ref(new BrowserMultiFormatReader());
 
 const start = async () => {
   try {
-    await codeReader.value.decodeFromVideoDevice(
+    const reader = await getCodeReader();
+    await reader.decodeFromVideoDevice(
       undefined,
       scanner.value,
       (result, err) => {
@@ -64,7 +73,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  codeReader.value.reset();
+  codeReader.value?.reset();
 });
 </script>
 
