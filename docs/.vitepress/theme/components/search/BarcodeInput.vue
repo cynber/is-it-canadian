@@ -2,8 +2,8 @@
   <div class="barcode-entry">
     <!-- Show this when not searching -->
     <template v-if="!isSearchActive">
-      <!-- First row -->
-      <div class="input-group__row">
+      <!-- Entry options -->
+      <div v-if="!showManualEntry" class="input-group__stack">
         <button
           class="entry-btn scan-btn"
           :class="{ 'scan-btn--active': barcode }"
@@ -22,12 +22,18 @@
             @error="onError"
           ></ImageScanner>
         </label>
+
+        <button class="entry-btn manual-btn" @click="showManualEntry = true">
+          <Icon icon="material-symbols:keyboard-rounded" width="24" height="24" />
+          Enter a barcode manually
+        </button>
       </div>
 
-      <!-- Second row -->
-      <div class="input-group__row">
+      <!-- Manual barcode entry -->
+      <div v-else class="input-group__row">
         <input
           type="text"
+          ref="manualInput"
           class="text-input"
           placeholder="Enter a barcode"
           v-model="barcode"
@@ -90,7 +96,15 @@ export default {
       error: null,
       showCamera: false,
       isSearchActive: false,
+      showManualEntry: false,
     };
+  },
+  watch: {
+    showManualEntry(shown) {
+      if (shown) {
+        this.$nextTick(() => this.$refs.manualInput?.focus());
+      }
+    },
   },
   methods: {
     toggleCamera() {
@@ -153,6 +167,7 @@ export default {
     resetSearch() {
       this.barcode = "";
       this.isSearchActive = false;
+      this.showManualEntry = false;
       this.error = null;
       this.$emit("product-fetched", null);
     },
@@ -196,6 +211,13 @@ export default {
   gap: 8px;
 }
 
+.input-group__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
 .input-group__row {
   display: flex;
   gap: 8px;
@@ -234,6 +256,11 @@ export default {
   flex: 1;
   position: relative;
   justify-content: center;
+  border: 2px solid var(--vp-c-divider);
+}
+
+.manual-btn {
+  flex: 1;
   border: 2px solid var(--vp-c-divider);
 }
 
