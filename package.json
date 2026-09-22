@@ -1,14 +1,22 @@
 {
   "type": "module",
+  "packageManager": "pnpm@10.11.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "scripts": {
     "docs:dev": "vitepress dev docs --force",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "deploy": "pnpm docs:build && wrangler deploy"
   },
   "devDependencies": {
     "@iconify/vue": "^4.3.0",
     "vitepress": "^1.6.4",
-    "vue": "^3.5.41"
+    "vue": "^3.5.41",
+    "wrangler": "^4.136.2"
   },
   "dependencies": {
     "@cynber/vitepress-valence": "^0.2.2",

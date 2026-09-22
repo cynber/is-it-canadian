@@ -1,0 +1,8 @@
+{
+  "name": "is-it-canadian",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./docs/.vitepress/dist",
+    "not_found_handling": "404-page"
+  }
+}
